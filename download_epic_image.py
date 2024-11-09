@@ -3,6 +3,7 @@ import requests
 from download_images import download_image
 from dotenv import load_dotenv
 from urllib.parse import urlencode
+from datetime import datetime
 load_dotenv()
 
 def get_epic_image_links():
@@ -22,12 +23,14 @@ def get_epic_image_links():
     except (ValueError, requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError) as e:
         print(f"Ошибка при обработке JSON ответа от NASA EPIC: {e}")
         return
-
-    epic_url = [
-        f"{archive_url}/{item['date'].split(' ')[0].replace('-', '/')}/png/{item['image']}.png?api_key={api_key}"
-        for item in data
-    ]
-    for idx, link in enumerate(epic_url, start=1):
+    epic_urls = []
+    for item in data:
+        image_date = item['date']
+        image_date_format = datetime.fromisoformat(image_date)
+        image_date = datetime.date(image_date_format).strftime("%Y/%m/%d")   
+        epic_url = f"{archive_url}/{image_date}/png/{item['image']}.png?api_key={api_key}"
+        epic_urls.append(epic_url)
+    for idx, link in enumerate(epic_urls, start=1):
         download_image(link, f"NASA_EPIC_{idx}.png", "images")
 
 if __name__ == '__main__':

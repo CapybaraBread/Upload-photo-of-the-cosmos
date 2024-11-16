@@ -3,24 +3,24 @@ import requests
 from download_images import download_image
 
 
-def fetch_spacex_last_launch():
+def download_spacex_last_launch():
+    params = {
+         "id":"5eb87d47ffd86e000604b38a"
+    }
     image_url = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
-    download_image(image_url, "hubble.jpeg", "images" )
+    download_image(image_url, "hubble.jpeg", "images", params )
 
-    parems = {"id":"5eb87d47ffd86e000604b38a"}
-    try:
-        respons = requests.get("https://api.spacexdata.com/v5/launches/", params=parems)
-    except(requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError) as e:
-        print(f"Ошибка при запросе к API SpaceX: {e}")
-        return
-    
-    try:
-        image_links = respons.json()[19]["links"]["flickr"]["original"]
-    except (ValueError, KeyError, IndexError) as e:
-        print(f"Ошибка при обработке JSON ответа от SpaceX API: {e}")
-        return
+    respons = requests.get("https://api.spacexdata.com/v5/launches/", params=params) 
+    image_links = respons.json()[19]["links"]["flickr"]["original"]
 
     for idx, image_url in enumerate(image_links, start=1):
-        download_image(image_url, f"spacex_image_{idx}.jpg", "images" )
+            download_image(image_url, f"spacex_image_{idx}.jpg", "images", params)
 if __name__ == '__main__':
-    fetch_spacex_last_launch()
+    try:
+        download_spacex_last_launch()
+    except(requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError, ValueError, KeyError, IndexError) as e:
+        print(f"Ошибка при запросе к API SpaceX: {e}")
+    except requests.exceptions.RequestException as a:
+        print(f"Не удалось скачать картинку, ошибка:{a}")
+    except Exception as a:
+        print(f"Не опознанная ошибка: {a}")

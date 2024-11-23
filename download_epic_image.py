@@ -6,14 +6,15 @@ from urllib.parse import urlencode
 from datetime import datetime
 
 
-def download_epic_image():
-    epic_api_key=os.environ["API_KEY"]
+def download_epic_image(epic_api_key):
+    
     base_url = "https://api.nasa.gov/EPIC/api/natural"
     archive_url = "https://api.nasa.gov/EPIC/archive/natural"
     params = {
         "api_key":epic_api_key,
     }
     response = requests.get(base_url, params=params) 
+    response.raise_for_status()
     data = response.json()
     epic_urls = []
     for item in data:
@@ -27,6 +28,7 @@ def download_epic_image():
 
 if __name__ == '__main__':
     load_dotenv()
+    epic_api_key=os.environ["EPIC_API_KEY"]
     try:
        download_epic_image()
     except requests.exceptions.HTTPError as e:

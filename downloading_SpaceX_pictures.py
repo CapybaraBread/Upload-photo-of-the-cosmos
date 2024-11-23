@@ -10,8 +10,9 @@ def download_spacex_last_launch():
     image_url = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
     download_image(image_url, "hubble.jpeg", "images", params )
 
-    respons = requests.get("https://api.spacexdata.com/v5/launches/", params=params) 
-    image_links = respons.json()[19]["links"]["flickr"]["original"]
+    response = requests.get("https://api.spacexdata.com/v5/launches/", params=params) 
+    response.raise_for_status()
+    image_links = response.json()[19]["links"]["flickr"]["original"]
 
     for idx, image_url in enumerate(image_links, start=1):
             download_image(image_url, f"spacex_image_{idx}.jpg", "images", params)

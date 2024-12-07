@@ -20,7 +20,6 @@ def send_random_image(token, folder, channel_id):
 
     with open(image_path, 'rb') as image_file:
         bot.send_photo(chat_id=channel_id, photo=image_file)
-        print(f"Изображение '{random_image}' отправлено в канал.")
 
 def main():
     load_dotenv()

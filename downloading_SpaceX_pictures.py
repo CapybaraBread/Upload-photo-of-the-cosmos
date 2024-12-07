@@ -23,5 +23,3 @@ if __name__ == '__main__':
         print(f"Ошибка при запросе к API SpaceX: {e}")
     except requests.exceptions.RequestException as a:
         print(f"Не удалось скачать картинку, ошибка:{a}")
-    except Exception as a:
-        print(f"Не опознанная ошибка: {a}")

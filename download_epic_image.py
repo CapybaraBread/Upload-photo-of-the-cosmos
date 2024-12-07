@@ -37,5 +37,3 @@ if __name__ == '__main__':
         print(f"Не удалось скачать картинку, ошибка:{a}")
     except (ValueError, requests.exceptions.JSONDecodeError) as e:
         print(f"Ошибка при обработке JSON ответа от NASA EPIC: {e}")
-    except Exception as y:
-        print(f"Не опознная ошибка: {y}")

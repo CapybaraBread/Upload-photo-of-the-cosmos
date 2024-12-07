@@ -22,9 +22,9 @@ def download_apod_images(apod_token):
             download_image(image_url, f"NASA_{idx}.jpg","images", params)
 if __name__ == '__main__':
     load_dotenv()
-    apod_token=os.environ["APOD_TOKEN"]
+    epic_api_key=os.environ["EPIC_API_KEY"]
     try:
-        download_apod_images(apod_token)
+        download_apod_images(epic_api_key)
     except(requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError) as e:
         print(f"Ошибка при запросе к API NASA EPIC: {e}")
     except requests.exceptions.RequestException as a:

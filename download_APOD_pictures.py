@@ -15,8 +15,8 @@ def download_apod_images(apod_token):
     }
     response = requests.get(apod_url, params=params)
     response.raise_for_status()
-    nasa_images_json = response.json()
-    for idx, image_json in enumerate(nasa_images_json, start=1):
+    nasa_images = response.json()
+    for idx, image_json in enumerate(nasa_images, start=1):
         image_url = image_json.get("url") or image_json.get("hdurl")
         if image_url:
             download_image(image_url, f"NASA_{idx}.jpg","images", params)

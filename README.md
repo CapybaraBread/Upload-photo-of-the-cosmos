@@ -108,9 +108,6 @@ python send_foto_bot.py
 
 ### Список переменных:
 
-- **`NASA_API_KEY`**  
-  Токен для доступа к API NASA. Используется в скриптах для загрузки изображений с EPIC и APOD. Получить токен можно, зарегистрировавшись на [сайте NASA API](https://api.nasa.gov).
-
 - **`EPIC_API_KEY`**  
   Токен для доступа к API EPIC (Earth Polychromatic Imaging Camera). Используется в скрипте `download_epic_image.py`.
 

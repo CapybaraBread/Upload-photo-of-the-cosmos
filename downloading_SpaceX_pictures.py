@@ -3,7 +3,7 @@ import requests
 from download_images import download_image
 
 
-def download_spacex_last_launch():
+def download_spacex_foto():
     params = {
          "id":"5eb87d47ffd86e000604b38a"
     }
@@ -18,7 +18,7 @@ def download_spacex_last_launch():
             download_image(image_url, f"spacex_image_{idx}.jpg", "images", params)
 if __name__ == '__main__':
     try:
-        download_spacex_last_launch()
+        download_spacex_foto()
     except(requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError, ValueError, KeyError, IndexError) as e:
         print(f"Ошибка при запросе к API SpaceX: {e}")
     except requests.exceptions.RequestException as a:

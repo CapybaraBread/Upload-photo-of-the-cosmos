@@ -111,8 +111,6 @@ python send_foto_bot.py
 - **`EPIC_API_KEY`**  
   Токен для доступа к API EPIC (Earth Polychromatic Imaging Camera). Используется в скрипте `download_epic_image.py`.
 
-- **`APOD_TOKEN`**  
-  Токен для работы с API NASA APOD (Astronomy Picture of the Day). Используется в скрипте `download_APOD_pictures.py`.
 
 - **`TELEGRAM_BOT_TOKEN`**  
   Токен Telegram-бота, который используется для отправки сообщений в Telegram. Создать бота и получить токен можно через [BotFather](https://core.telegram.org/bots).
@@ -130,7 +128,6 @@ python send_foto_bot.py
 ### Пример `.env` файла:
 
 ```env
-NASA_API_KEY=ваш_nasa_api_ключ
 EPIC_API_KEY=ваш_epic_ключ
 APOD_TOKEN=ваш_apod_ключ
 TELEGRAM_BOT_TOKEN=ваш_telegram_бот_токен

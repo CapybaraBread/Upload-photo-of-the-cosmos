@@ -30,7 +30,7 @@ if __name__ == '__main__':
     load_dotenv()
     epic_api_key=os.environ["EPIC_API_KEY"]
     try:
-       download_epic_image()
+       download_epic_image(epic_api_key)
     except requests.exceptions.HTTPError as e:
         print(f"Ошибка при запросе к API NASA EPIC: {e}")
     except requests.exceptions.RequestException as a:

@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 
 
 
-def download_apod_images(apod_token):
+def download_apod_images(epic_api_key):
     apod_url = "https://api.nasa.gov/planetary/apod"
     count = 31 
     params = {
-        'api_key': apod_token,
+        'api_key': epic_api_key,
         'count': count
     }
     response = requests.get(apod_url, params=params)

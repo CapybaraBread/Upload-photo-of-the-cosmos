@@ -5,10 +5,6 @@ import argparse
 from file_extensio import get_file_extension
 import random
 def download_spacex_foto():
-
-    image_url = "https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
-    download_image(image_url, "hubble.jpeg", "images", params=None )
-
     response = requests.get("https://api.spacexdata.com/v5/launches/", params=None) 
     response.raise_for_status()
     random_number = random.randint(1, 30)

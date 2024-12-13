@@ -8,10 +8,14 @@ import argparse
 
 def download_apod_images(epic_api_key):
     apod_url = "https://api.nasa.gov/planetary/apod"
-    count = 31 
+    
+    paser_count = argparse.ArgumentParser(description="Сколько изображений вы хотите загрузить?")
+    paser_count.add_argument('--count', type=int, default=31, help='Сколько изображений вы хотите загрузить? ') 
+    args = paser_count.parse_args()
+    count = args.count
     params = {
         'api_key': epic_api_key,
-        'count': count
+        'count': int(count)
     }
     response = requests.get(apod_url, params=params)
     response.raise_for_status()

@@ -4,8 +4,7 @@ from download_images import download_image
 from dotenv import load_dotenv
 from urllib.parse import urlencode
 from datetime import datetime
-
-
+import argparse
 def download_epic_image(epic_api_key):
     
     base_url = "https://api.nasa.gov/EPIC/api/natural"
@@ -24,7 +23,11 @@ def download_epic_image(epic_api_key):
         epic_url = f"{archive_url}/{image_date}/png/{item['image']}.png"
         epic_urls.append(epic_url)
     for idx, link in enumerate(epic_urls, start=1):
-        download_image(link, f"NASA_EPIC_{idx}.png", "images", params)
+            parser = argparse.ArgumentParser(description="Скрипт для загрузки космических изображений")
+            parser.add_argument('--directory', type=str, default='./images', help='Путь к папке для сохранения изображений')    
+            args = parser.parse_args()
+            directory = args.directory
+            download_image(link, f"NASA_EPIC_{idx}.png", directory, params)
 
 if __name__ == '__main__':
     load_dotenv()

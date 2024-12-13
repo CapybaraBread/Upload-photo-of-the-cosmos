@@ -3,7 +3,7 @@ import os
 import requests
 from download_images import download_image
 from dotenv import load_dotenv
-
+import argparse
 
 
 def download_apod_images(epic_api_key):
@@ -19,7 +19,11 @@ def download_apod_images(epic_api_key):
     for idx, image_json in enumerate(nasa_images, start=1):
         image_url = image_json.get("url") or image_json.get("hdurl")
         if image_url:
-            download_image(image_url, f"NASA_{idx}.jpg","images", params)
+            parser = argparse.ArgumentParser(description="Скрипт для загрузки космических изображений")
+            parser.add_argument('--directory', type=str, default='./images', help='Путь к папке для сохранения изображений')    
+            args = parser.parse_args()
+            directory = args.directory
+            download_image(image_url, f"NASA_{idx}.jpg", directory, params)
 if __name__ == '__main__':
     load_dotenv()
     epic_api_key=os.environ["EPIC_API_KEY"]

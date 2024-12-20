@@ -4,7 +4,7 @@ import argparse
 import random
 
 
-def download_spacex_foto():
+def download_spacex_foto(directory):
     response = requests.get(
          "https://api.spacexdata.com/v5/launches/", params=None
     )
@@ -12,7 +12,6 @@ def download_spacex_foto():
     random_number = random.randint(1, 30)
     image_links = response.json()[random_number]["links"]["flickr"]["original"]
     for idx, image_url in enumerate(image_links, start=1):
-        directory = args.directory
         try:
             download_image(
                 image_url,
@@ -36,7 +35,7 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
     try:
-        download_spacex_foto()
+        download_spacex_foto(args.directory)
     except (
         requests.exceptions.HTTPError,
         requests.exceptions.JSONDecodeError,

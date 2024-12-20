@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import argparse
 
 
-def download_apod_images(epic_api_key):
+def download_apod_images(epic_api_key, directory):
     apod_url = "https://api.nasa.gov/planetary/apod"
     params = {
         'api_key': epic_api_key,
@@ -17,7 +17,6 @@ def download_apod_images(epic_api_key):
     for idx, image_json in enumerate(nasa_images, start=1):
         image_url = image_json.get("url") or image_json.get("hdurl")
         if image_url:
-            directory = args.directory
             download_image(image_url, f"NASA_{idx}.jpg", directory, params)
 
 
@@ -46,7 +45,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     epic_api_key = os.environ["EPIC_API_KEY"]
     try:
-        download_apod_images(epic_api_key)
+        download_apod_images(epic_api_key, args.directory)
     except (
         requests.exceptions.HTTPError,
         requests.exceptions.JSONDecodeError
